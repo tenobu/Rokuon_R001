@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
-@interface ViewController : UIViewController
-
+@interface ViewController : UIViewController <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
+{
+	AVAudioSession *session;
+	AVAudioRecorder *recorder;
+	AVAudioPlayer *player;
+	
+	NSURL *url;
+}
 
 @end
 
