@@ -84,6 +84,8 @@
 
 -(void)recordFile
 {
+	NSLog(@"Record");
+	
 	// Prepare recording(Audio session)
 	NSError *error = nil;
 	
@@ -138,6 +140,8 @@
 
 -(void)stopRecord
 {
+	NSLog(@"Stop");
+	
 	if ( recorder != nil && recorder.isRecording )
 	{
 		[recorder stop];
@@ -148,6 +152,8 @@
 
 -(void)playRecord
 {
+	NSLog(@"Play");
+	
 	NSError *error = nil;
 	
 	if ( [[NSFileManager defaultManager] fileExistsAtPath:[url path]] )
