@@ -14,7 +14,9 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
+	
 	[super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 	// 近接センサオン
@@ -25,9 +27,43 @@
 											 selector:@selector(proximitySensorStateDidChange:)
 												 name:UIDeviceProximityStateDidChangeNotification
 											   object:nil];
+
+	tableView.dataSource = self;
+	tableView.delegate = self;
+	
+	playSounds = [[NSMutableDictionary alloc] init];
+	
+
+	NSString *dir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+	
+	NSDateFormatter *df = [[NSDateFormatter alloc] init];
+	[df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]]; // Localeの指定
+
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	
+	NSError *error;
+	NSArray *list = [fileManager contentsOfDirectoryAtPath:dir
+													 error:&error];
+	
+	// ファイルやディレクトリの一覧を表示する
+	for (NSString *path in list) {
+		url = [NSURL fileURLWithPath:path];
+
+		NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
+							  @"url", url,
+							  nil];
+		
+		[playSounds setObject:data
+					   forKey:path];
+	}
+	
+	playTitles = [playSounds.allKeys sortedArrayUsingComparator:^(id obj1, id obj2) {
+		return [obj2 compare:obj1];
+	}];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
 	[super didReceiveMemoryWarning];
 	// Dispose of any resources that can be recreated.
 }
@@ -135,6 +171,7 @@
 		NSLog(@"Error when preparing audio recorder :%@", [error localizedDescription]);
 		return;
 	}
+	
 	[recorder record];
 }
 
@@ -167,6 +204,29 @@
 		[player prepareToPlay];
 		[player play];
 	}
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+	return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+	return playSounds.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	UITableViewCell *cell;// = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+	// cellデータが無い場合、UITableViewCellを生成して、"cell"というkeyでキャッシュする
+	if (!cell) {
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+	}
+	
+	cell.textLabel.text = [playTitles objectAtIndex:indexPath.row];
+	
+	return cell;
 }
 
 @end

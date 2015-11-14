@@ -9,13 +9,18 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface ViewController : UIViewController <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
+@interface ViewController : UIViewController <AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDataSource, UITableViewDelegate>
 {
 	AVAudioSession *session;
 	AVAudioRecorder *recorder;
 	AVAudioPlayer *player;
 	
 	NSURL *url;
+	
+	__weak IBOutlet UITableView *tableView;
+	
+	NSMutableDictionary *playSounds;
+	NSArray *playTitles;
 }
 
 @end
