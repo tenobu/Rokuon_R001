@@ -239,20 +239,16 @@
 	}
 }
 
+
 //
 //
 //
-/*- (void)drawTitle:(NSString *)title
+- (void)drawTitle:(NSString *)title
 {
-	switch (title) {
-  case
-			<#statements#>
-			break;
-			
-  default:
-			break;
+	if ([title isEqualToString:@""]) {
+
 	}
-}*/
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
