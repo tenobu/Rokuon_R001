@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -19,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2zb-nC-i3D">
-                                <rect key="frame" x="0.0" y="98" width="600" height="502"/>
+                                <rect key="frame" x="0.0" y="128" width="600" height="472"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.6761082604245674" green="0.87165300663173872" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -28,7 +29,7 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9sB-W8-FxJ" id="IRP-wk-qls">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <animations/>
                                         </tableViewCellContentView>
@@ -39,28 +40,57 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="svj-vD-E7x">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
+                            <imageView userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pause.png" translatesAutoresizingMaskIntoConstraints="NO" id="svj-vD-E7x">
+                                <rect key="frame" x="0.0" y="20" width="600" height="100"/>
                                 <animations/>
-                                <color key="backgroundColor" red="1" green="0.087742814289999999" blue="0.062984731629999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="kxH-l0-vUe"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pZC-wi-JDX">
+                                <rect key="frame" x="20" y="59" width="560" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOs-Fp-Ab7">
+                                <rect key="frame" x="20" y="59" width="560" height="21"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="OOs-Fp-Ab7" secondAttribute="height" multiplier="80:3" id="JSW-HD-T0o"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="2zb-nC-i3D" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="98" id="IYp-P9-BfG"/>
-                            <constraint firstItem="svj-vD-E7x" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="O3r-PL-xHx"/>
+                            <constraint firstItem="2zb-nC-i3D" firstAttribute="top" secondItem="OOs-Fp-Ab7" secondAttribute="bottom" constant="48" id="4EW-SA-seN"/>
+                            <constraint firstItem="svj-vD-E7x" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="20" id="6i2-yi-3ZY"/>
+                            <constraint firstItem="2zb-nC-i3D" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="108" id="FSn-7p-M2Z"/>
+                            <constraint firstItem="pZC-wi-JDX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="MMS-5r-H59"/>
                             <constraint firstAttribute="trailingMargin" secondItem="2zb-nC-i3D" secondAttribute="trailing" constant="-20" id="VYZ-LY-oXK"/>
+                            <constraint firstItem="OOs-Fp-Ab7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="39" id="YpG-Xm-qPg"/>
                             <constraint firstItem="svj-vD-E7x" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="Zfg-gR-rEL"/>
+                            <constraint firstItem="pZC-wi-JDX" firstAttribute="baseline" secondItem="OOs-Fp-Ab7" secondAttribute="baseline" id="avS-rm-ui6"/>
+                            <constraint firstItem="OOs-Fp-Ab7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eDw-Ks-sv7"/>
                             <constraint firstItem="2zb-nC-i3D" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="eXb-eT-5T6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="svj-vD-E7x" secondAttribute="trailing" constant="-20" id="g6Y-IU-zK5"/>
+                            <constraint firstItem="pZC-wi-JDX" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="gPP-0d-WEN"/>
+                            <constraint firstItem="pZC-wi-JDX" firstAttribute="centerX" secondItem="svj-vD-E7x" secondAttribute="centerX" id="gnh-Pv-3pf"/>
+                            <constraint firstItem="pZC-wi-JDX" firstAttribute="centerX" secondItem="2zb-nC-i3D" secondAttribute="centerX" id="hf6-1V-a6g"/>
+                            <constraint firstItem="pZC-wi-JDX" firstAttribute="top" secondItem="OOs-Fp-Ab7" secondAttribute="top" id="hze-zR-Pig"/>
+                            <constraint firstItem="pZC-wi-JDX" firstAttribute="leading" secondItem="OOs-Fp-Ab7" secondAttribute="leading" id="nIU-PV-r5D"/>
+                            <constraint firstItem="pZC-wi-JDX" firstAttribute="trailing" secondItem="OOs-Fp-Ab7" secondAttribute="trailing" id="som-MM-QYQ"/>
                             <constraint firstItem="2zb-nC-i3D" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="ziL-Ob-vNJ"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="label_SoundTitle_Back" destination="pZC-wi-JDX" id="JWE-WV-7Jx"/>
+                        <outlet property="label_SoundTitle_Front" destination="OOs-Fp-Ab7" id="0uW-kA-GGs"/>
                         <outlet property="tableView" destination="2zb-nC-i3D" id="9nq-Na-kGV"/>
                     </connections>
                 </viewController>
@@ -69,4 +99,7 @@
             <point key="canvasLocation" x="312" y="327"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Pause.png" width="100" height="100"/>
+    </resources>
 </document>

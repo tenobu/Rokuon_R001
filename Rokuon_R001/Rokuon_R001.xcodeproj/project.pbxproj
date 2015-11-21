@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		98656F661BFF84A2002D4EB7 /* Rec.png in Resources */ = {isa = PBXBuildFile; fileRef = 98656F651BFF84A2002D4EB7 /* Rec.png */; };
 		988CBFFD1BF374C500BD45C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 988CBFFC1BF374C500BD45C8 /* main.m */; };
 		988CC0001BF374C500BD45C8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 988CBFFF1BF374C500BD45C8 /* AppDelegate.m */; };
 		988CC0031BF374C500BD45C8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 988CC0021BF374C500BD45C8 /* ViewController.m */; };
@@ -15,6 +16,8 @@
 		988CC00B1BF374C600BD45C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 988CC0091BF374C600BD45C8 /* LaunchScreen.storyboard */; };
 		988CC0161BF374C600BD45C8 /* Rokuon_R001Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 988CC0151BF374C600BD45C8 /* Rokuon_R001Tests.m */; };
 		988CC0211BF374C600BD45C8 /* Rokuon_R001UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 988CC0201BF374C600BD45C8 /* Rokuon_R001UITests.m */; };
+		988CC0311BF774B800BD45C8 /* Pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 988CC02F1BF774B800BD45C8 /* Pause.png */; };
+		988CC0321BF774B800BD45C8 /* Play.png in Resources */ = {isa = PBXBuildFile; fileRef = 988CC0301BF774B800BD45C8 /* Play.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		98656F651BFF84A2002D4EB7 /* Rec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Rec.png; path = Images/Rec.png; sourceTree = "<group>"; };
 		988CBFF81BF374C500BD45C8 /* Rokuon_R001.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rokuon_R001.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		988CBFFC1BF374C500BD45C8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		988CBFFE1BF374C500BD45C8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,6 +55,8 @@
 		988CC01C1BF374C600BD45C8 /* Rokuon_R001UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Rokuon_R001UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		988CC0201BF374C600BD45C8 /* Rokuon_R001UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Rokuon_R001UITests.m; sourceTree = "<group>"; };
 		988CC0221BF374C600BD45C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		988CC02F1BF774B800BD45C8 /* Pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Pause.png; path = Images/Pause.png; sourceTree = "<group>"; };
+		988CC0301BF774B800BD45C8 /* Play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Play.png; path = Images/Play.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +115,7 @@
 				988CC0071BF374C600BD45C8 /* Assets.xcassets */,
 				988CC0091BF374C600BD45C8 /* LaunchScreen.storyboard */,
 				988CC00C1BF374C600BD45C8 /* Info.plist */,
+				988CC02E1BF7748600BD45C8 /* Images */,
 				988CBFFB1BF374C500BD45C8 /* Supporting Files */,
 			);
 			path = Rokuon_R001;
@@ -138,6 +145,16 @@
 				988CC0221BF374C600BD45C8 /* Info.plist */,
 			);
 			path = Rokuon_R001UITests;
+			sourceTree = "<group>";
+		};
+		988CC02E1BF7748600BD45C8 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				988CC02F1BF774B800BD45C8 /* Pause.png */,
+				988CC0301BF774B800BD45C8 /* Play.png */,
+				98656F651BFF84A2002D4EB7 /* Rec.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,8 +263,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98656F661BFF84A2002D4EB7 /* Rec.png in Resources */,
 				988CC00B1BF374C600BD45C8 /* LaunchScreen.storyboard in Resources */,
 				988CC0081BF374C600BD45C8 /* Assets.xcassets in Resources */,
+				988CC0321BF774B800BD45C8 /* Play.png in Resources */,
+				988CC0311BF774B800BD45C8 /* Pause.png in Resources */,
 				988CC0061BF374C600BD45C8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -499,6 +519,7 @@
 				988CC0271BF374C600BD45C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		988CC0281BF374C600BD45C8 /* Build configuration list for PBXNativeTarget "Rokuon_R001Tests" */ = {
 			isa = XCConfigurationList;
@@ -507,6 +528,7 @@
 				988CC02A1BF374C600BD45C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		988CC02B1BF374C600BD45C8 /* Build configuration list for PBXNativeTarget "Rokuon_R001UITests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +537,7 @@
 				988CC02D1BF374C600BD45C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

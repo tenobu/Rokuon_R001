@@ -16,7 +16,6 @@
 
 - (void)viewDidLoad
 {
-	
 	[super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 	// 近接センサオン
@@ -32,34 +31,8 @@
 	tableView.delegate = self;
 	
 	playSounds = [[NSMutableDictionary alloc] init];
-	
 
-	NSString *dir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-	
-	NSDateFormatter *df = [[NSDateFormatter alloc] init];
-	[df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]]; // Localeの指定
-
-	NSFileManager *fileManager = [NSFileManager defaultManager];
-	
-	NSError *error;
-	NSArray *list = [fileManager contentsOfDirectoryAtPath:dir
-													 error:&error];
-	
-	// ファイルやディレクトリの一覧を表示する
-	for (NSString *path in list) {
-		url = [NSURL fileURLWithPath:path];
-
-		NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
-							  @"url", url,
-							  nil];
-		
-		[playSounds setObject:data
-					   forKey:path];
-	}
-	
-	playTitles = [playSounds.allKeys sortedArrayUsingComparator:^(id obj1, id obj2) {
-		return [obj2 compare:obj1];
-	}];
+	[self resetPlaySounds];
 }
 
 - (void)didReceiveMemoryWarning
@@ -102,49 +75,40 @@
 			
 			break;
 	}
-	
 }
 
--(NSMutableDictionary *)setAudioRecorder
+- (void)resetPlaySounds
 {
-	NSMutableDictionary *settings = [[NSMutableDictionary alloc] init];
-	[settings setValue:[NSNumber numberWithInt:kAudioFormatLinearPCM] forKey:AVFormatIDKey];
-	[settings setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey];
-	[settings setValue:[NSNumber numberWithInt:2] forKey:AVNumberOfChannelsKey];
-	[settings setValue:[NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
-	[settings setValue:[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsBigEndianKey];
-	[settings setValue:[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsFloatKey];
+	NSString *dir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
 	
-	return settings;
+	NSDateFormatter *df = [[NSDateFormatter alloc] init];
+	[df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]]; // Localeの指定
+	
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	
+	NSError *error;
+	NSArray *list = [fileManager contentsOfDirectoryAtPath:dir
+													 error:&error];
+	
+	// ファイルやディレクトリの一覧を表示する
+	for (NSString *path in list) {
+		url = [NSURL fileURLWithPath:path];
+		
+		NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
+							  @"url", url,
+							  nil];
+		
+		[playSounds setObject:data
+					   forKey:path];
+	}
+	
+	playTitles = [playSounds.allKeys sortedArrayUsingComparator:^(id obj1, id obj2) {
+		return [obj2 compare:obj1];
+	}];
 }
 
--(void)recordFile
+- (NSURL*)getURL
 {
-	NSLog(@"Record");
-	
-	// Prepare recording(Audio session)
-	NSError *error = nil;
-	
-	session = [AVAudioSession sharedInstance];
-	
-	if ( session.inputAvailable )   // for iOS6 [session inputIsAvailable]  iOS5
-	{
-		[session setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];
-	}
-	
-	if ( error != nil )
-	{
-		NSLog(@"Error when preparing audio session :%@", [error localizedDescription]);
-		return;
-	}
-	
-	[session setActive:YES error:&error];
-	if ( error != nil )
-	{
-		NSLog(@"Error when enabling audio session :%@", [error localizedDescription]);
-		return;
-	}
-	
 	// File Path
 	NSString *dir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
 	
@@ -162,8 +126,57 @@
 	NSString *filePath = [dir stringByAppendingFormat: @"/%@.caf", strNow];
 	url = [NSURL fileURLWithPath: filePath];
 	
-	// recorder = [[AVAudioRecorder alloc] initWithURL:url settings:nil error:&error];
-	recorder = [[AVAudioRecorder alloc] initWithURL:url settings:[self setAudioRecorder] error:&error];
+	return url;
+}
+
+- (NSMutableDictionary *)setAudioRecorder
+{
+	NSMutableDictionary *settings = [[NSMutableDictionary alloc] init];
+	[settings setValue:[NSNumber numberWithInt:kAudioFormatLinearPCM] forKey:AVFormatIDKey];
+	[settings setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey];
+	[settings setValue:[NSNumber numberWithInt:2] forKey:AVNumberOfChannelsKey];
+	[settings setValue:[NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
+	[settings setValue:[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsBigEndianKey];
+	[settings setValue:[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsFloatKey];
+	
+	return settings;
+}
+
+//
+// recordFile
+//
+- (void)recordFile
+{
+	NSLog(@"Record");
+	
+	// Prepare recording(Audio session)
+	NSError *error = nil;
+	
+	session = [AVAudioSession sharedInstance];
+	
+	if ( session.inputAvailable )   // for iOS6 [session inputIsAvailable]  iOS5
+	{
+		[session setCategory:AVAudioSessionCategoryPlayAndRecord
+					   error:&error];
+	}
+	
+	if ( error != nil )
+	{
+		NSLog(@"Error when preparing audio session :%@", [error localizedDescription]);
+		return;
+	}
+	
+	[session setActive:YES
+				 error:&error];
+	if ( error != nil )
+	{
+		NSLog(@"Error when enabling audio session :%@", [error localizedDescription]);
+		return;
+	}
+	
+	recorder = [[AVAudioRecorder alloc] initWithURL:[self getURL]
+										   settings:[self setAudioRecorder]
+											  error:&error];
 	
 	//recorder.meteringEnabled = YES;
 	if ( error != nil )
@@ -175,7 +188,10 @@
 	[recorder record];
 }
 
--(void)stopRecord
+//
+// stopRecord
+//
+- (void)stopRecord
 {
 	NSLog(@"Stop");
 	
@@ -187,7 +203,10 @@
 	}
 }
 
--(void)playRecord
+//
+// playRecord
+//
+- (void)playRecord
 {
 	NSLog(@"Play");
 	
@@ -205,6 +224,35 @@
 		[player play];
 	}
 }
+
+//
+//
+//
+- (void)toCommand:(NSString *)command
+{
+	if ([command isEqualToString:@"toPlay"]) {
+		
+	} else if ([command isEqualToString:@"toRec"]) {
+		
+	} else if ([command isEqualToString:@"toPause"]) {
+		
+	}
+}
+
+//
+//
+//
+/*- (void)drawTitle:(NSString *)title
+{
+	switch (title) {
+  case
+			<#statements#>
+			break;
+			
+  default:
+			break;
+	}
+}*/
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

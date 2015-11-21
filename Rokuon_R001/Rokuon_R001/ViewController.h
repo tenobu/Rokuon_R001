@@ -19,6 +19,9 @@
 	
 	__weak IBOutlet UITableView *tableView;
 	
+	__weak IBOutlet UILabel *label_SoundTitle_Front;
+	__weak IBOutlet UILabel *label_SoundTitle_Back;
+	
 	NSMutableDictionary *playSounds;
 	NSArray *playTitles;
 }
