@@ -50,7 +50,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pZC-wi-JDX">
                                 <rect key="frame" x="20" y="59" width="560" height="21"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="21"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -60,7 +60,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="OOs-Fp-Ab7" secondAttribute="height" multiplier="80:3" id="JSW-HD-T0o"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -89,6 +89,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="imageView" destination="svj-vD-E7x" id="aFt-Yh-b7n"/>
                         <outlet property="label_SoundTitle_Back" destination="pZC-wi-JDX" id="JWE-WV-7Jx"/>
                         <outlet property="label_SoundTitle_Front" destination="OOs-Fp-Ab7" id="0uW-kA-GGs"/>
                         <outlet property="tableView" destination="2zb-nC-i3D" id="9nq-Na-kGV"/>

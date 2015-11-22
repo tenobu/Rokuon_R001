@@ -64,6 +64,10 @@
 			// Wave Off
 			[self stopRecord];
 			
+			[self resetPlaySounds];
+
+			[tableView reloadData];
+			
 			[self playRecord];
 			
 			break;
@@ -91,15 +95,27 @@
 													 error:&error];
 	
 	// ファイルやディレクトリの一覧を表示する
-	for (NSString *path in list) {
+	for (NSString *name in list) {
+		NSString *path = [NSString stringWithFormat:@"%@/%@", dir, name];
+
 		url = [NSURL fileURLWithPath:path];
+
+		NSDictionary *attribute = [fileManager attributesOfItemAtPath:path error:nil];
+		
+		NSDate *creationDate = [attribute objectForKey:NSFileCreationDate];
+		NSDate *modificationDate = [attribute objectForKey:NSFileModificationDate];
+		NSNumber *fileSize = [attribute objectForKey:NSFileSize];
 		
 		NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
-							  @"url", url,
+							  name				, @"name"		,
+							  url				, @"url"		,
+							  creationDate		, @"cre date"	,
+							  modificationDate	, @"mod date"	,
+							  fileSize			, @"size"		,
 							  nil];
 		
 		[playSounds setObject:data
-					   forKey:path];
+					   forKey:name];
 	}
 	
 	playTitles = [playSounds.allKeys sortedArrayUsingComparator:^(id obj1, id obj2) {
@@ -212,6 +228,8 @@
 	
 	NSError *error = nil;
 	
+	NSLog(@"plat = %@", url);
+	
 	if ( [[NSFileManager defaultManager] fileExistsAtPath:[url path]] )
 	{
 		player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
@@ -220,6 +238,7 @@
 		{
 			NSLog(@"Error %@", [error localizedDescription]);
 		}
+		
 		[player prepareToPlay];
 		[player play];
 	}
@@ -228,15 +247,30 @@
 //
 //
 //
-- (void)toCommand:(NSString *)command
+- (void)toCommand:(NSString *)command toTitle:(NSString *)title
 {
 	if ([command isEqualToString:@"toPlay"]) {
+	
+		imageView.image = [UIImage imageNamed:@"Play.png"];
+		
+		[self playRecord];
 		
 	} else if ([command isEqualToString:@"toRec"]) {
 		
+		imageView.image = [UIImage imageNamed:@"Rec.png"];
+		
+		[self recordFile];
+		
 	} else if ([command isEqualToString:@"toPause"]) {
 		
+		imageView.image = [UIImage imageNamed:@"Pause.png"];
+		
+		[self stopRecord];
+		
 	}
+	
+	label_SoundTitle_Front.text	 = title;
+	label_SoundTitle_Back.text	 = title;
 }
 
 
@@ -271,6 +305,26 @@
 	cell.textLabel.text = [playTitles objectAtIndex:indexPath.row];
 	
 	return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	NSString *title_org = [playTitles objectAtIndex:indexPath.row];
+	
+	for (NSString *title in playSounds.keyEnumerator)
+	{
+		if ([title isEqualToString:title_org])
+		{
+			//url = playSounds[title];
+			NSDictionary *dic = playSounds[title];
+			NSLog(@"dic = key   : %@ ", [dic allKeys]);
+			NSLog(@"      value : %@ ", [dic allValues]);
+			
+			url = dic[@"url"];
+		}
+	}
+	
+	[self toCommand:@"toPlay" toTitle:[playTitles objectAtIndex:indexPath.row]];
 }
 
 @end
