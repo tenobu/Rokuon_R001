@@ -11,12 +11,13 @@
 
 @interface ViewController : UIViewController <AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDataSource, UITableViewDelegate>
 {
-	AVAudioSession *session;
+	AVAudioSession	*session;
 	AVAudioRecorder *recorder;
-	AVAudioPlayer *player;
+	AVAudioPlayer	*player;
 	
 	NSURL *url;
 	
+	__weak IBOutlet UIImageView *imageView;
 	__weak IBOutlet UITableView *tableView;
 	
 	__weak IBOutlet UILabel *label_SoundTitle_Front;
