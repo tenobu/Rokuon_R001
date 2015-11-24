@@ -35,6 +35,8 @@
 	[self resetPlaySounds];
 }
 
+//- a2
+
 - (void)didReceiveMemoryWarning
 {
 	[super didReceiveMemoryWarning];
